@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Live Stock Price Ticker</title>
+  </head>
+  <body>
+    Stock price: <span class="js-stock-price">N/A</span>
+    <button class=".js-share-button">Share</button>
+    <hr />
+    <strong>Stock buy transactions by other users:</strong>
+    <div class=".js-shared-stock-prices"></div>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  'use strict'
+
+  var socket = io()
+
+  socket.on('stock price update', function (stockPrice) {
+    var el = document.querySelector('.js-stock-price')
+    el.innerHTML = stockPrice
+  })
+})
+    </script>
+  </body>
+</html>

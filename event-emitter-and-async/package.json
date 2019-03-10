@@ -1,0 +1,21 @@
+{
+  "name": "event-emitter-and-async",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "lint": "standard",
+    "test": "jasmine-node spec/*-spec.js src/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-node": "^1.16.2",
+    "standard": "^12.0.1"
+  },
+  "dependencies": {
+    "async": "^2.6.2",
+    "request": "^2.88.0"
+  }
+}

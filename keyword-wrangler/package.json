@@ -4,7 +4,9 @@
   "description": "A tool to manage keywords",
   "main": "src/backend/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "create-tables": "sqlite3 /var/tmp/keyword-wrangler.test.sqlite < create-tables.sql",
+    "lint": "standard",
+    "test": "jasmine-node --verbose --captureExceptions ./spec/"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "jasmine-node": "^1.14.5",
     "request": "^2.79.0",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.0.6",
+    "standard": "^12.0.1"
   }
 }

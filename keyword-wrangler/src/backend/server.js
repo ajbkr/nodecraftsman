@@ -5,7 +5,11 @@ const { Percolator } = require('percolator')
 const dbSession = require('../../src/backend/db-session')
 
 function Server (port) {
-  const server = Percolator({ autoLink: false, port })
+  const server = Percolator({
+    autoLink: false,
+    port,
+    staticDir: `${__dirname}/../frontend`
+  })
 
   server.route('/api/keywords', {
     GET: (req, res) => {

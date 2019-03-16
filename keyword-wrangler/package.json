@@ -4,16 +4,16 @@
   "description": "A tool to manage keywords",
   "main": "src/backend/index.js",
   "scripts": {
+    "lint": "standard 'migrations/**/*.js' 'spec/**/*.js' 'src/backend/**/*.js' src/frontend/app/**/*.js",
     "migrate-up": "db-migrate up --env test",
-    "lint": "standard",
-    "test": "npm run migrate-up && jasmine-node --verbose --captureExceptions ./spec/"
+    "start": "node src/backend/index.js",
+    "test": "npm run migrate-up && jasmine-node --captureExceptions --verbose ./spec/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^2.1.4",
-    "bower": "^1.8.0",
     "db-migrate": "^0.10.0",
     "mysql": "^2.12.0",
     "node-dbi": "^0.7.1",

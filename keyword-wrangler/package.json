@@ -4,9 +4,9 @@
   "description": "A tool to manage keywords",
   "main": "src/backend/index.js",
   "scripts": {
-    "create-tables": "sqlite3 /var/tmp/keyword-wrangler.test.sqlite < create-tables.sql",
+    "migrate-up": "db-migrate up --env test",
     "lint": "standard",
-    "test": "jasmine-node --verbose --captureExceptions ./spec/"
+    "test": "npm run migrate-up && jasmine-node --verbose --captureExceptions ./spec/"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "percolator": "^1.5.0"
   },
   "devDependencies": {
+    "db-migrate-sqlite3": "^0.4.0",
     "jasmine-node": "^1.14.5",
     "request": "^2.79.0",
     "sqlite3": "^4.0.6",

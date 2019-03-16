@@ -1,27 +1,9 @@
 'use strict'
 
-const { Percolator } = require('percolator')
+const { Server } = require('./server')
 
-const dbSession = require('../../src/backend/db-session')
-
-const port = 3000
-const server = Percolator({ port, autoLink: false })
-
-server.route('/api/keywords', {
-  GET: (req, res) => {
-    dbSession.fetchAll('SELECT id, value, categoryID FROM keyword ORDER BY id',
-      (err, rows) => {
-        if (err) {
-          console.log(err)
-          res.status.internalServerError(err)
-        } else {
-          res.collection(rows).send()
-        }
-      }
-    )
-  }
-})
+const server = Server(3000)
 
 server.listen(_ => {
-  console.log(`Server started and listening on port ${port}...`)
+  console.log(`Server started and listening on port ${server.options.port}...`)
 })

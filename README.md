@@ -30,4 +30,6 @@ Changes made to the Keyword Wrangler product featured in part 2 of the book
 include:
 
 - bower has been replaced with npm (uses a public `node_modules` directory, given this is non-production code)
-- angular-grid has been replaced with ui-grid
+- angular-grid has been replaced with angular-ui-grid
+
+Some bugfixes remain outstanding.

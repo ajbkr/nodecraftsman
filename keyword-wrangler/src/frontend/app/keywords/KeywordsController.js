@@ -51,7 +51,7 @@
           field: 'id',
           displayName: 'ID',
           enableCellEdit: false,
-          width: '80px'
+          width: '80'
         }, {
           field: 'value',
           displayName: 'Value'
@@ -65,6 +65,7 @@
           displayName: 'Operations',
           cellTemplate: 'app/keywords/partials/operationsGridCell.html',
           enableCellEdit: false,
+          name: 'operations',
           sortable: false
         }]
       }

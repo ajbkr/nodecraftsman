@@ -16,7 +16,7 @@ if (dbOptions.driver === 'sqlite3') {
     database: dbOptions.database
   })
 } else {
-  throw new Error('No suitable databse config found')
+  throw new Error('No suitable database config found')
 }
 
 dbWrapper.connect()

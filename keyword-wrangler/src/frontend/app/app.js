@@ -2,7 +2,7 @@
 'use strict';
 
 (function () {
-  var app = angular.module('app', ['ngRoute', 'ui.grid', 'restangular'])
+  var app = angular.module('app', ['ngRoute', 'ui.grid', 'ui.grid.edit', 'restangular'])
 
   app.config([
     '$routeProvider',

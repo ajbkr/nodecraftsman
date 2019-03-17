@@ -3,9 +3,9 @@
 const async = require('async')
 
 let dbm
-// eslint-disable-next-line
+// eslint-disable-next-line no-unused-vars
 let type
-// eslint-disable-next-line
+// eslint-disable-next-line no-unused-vars
 let seed
 
 /**

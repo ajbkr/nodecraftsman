@@ -58,7 +58,7 @@ describe('The API', _ => {
         dbSession.insert('keyword', { value: 'Knife', categoryID: 2 },
           err => { callback(err) })
       }
-      // eslint-disable-next-line
+      // eslint-disable-next-line handle-callback-err
     ], (err, results) => {
       if (err) {
         throw err
@@ -67,8 +67,58 @@ describe('The API', _ => {
       request.get({
         json: true,
         url: `http://localhost:${server.options.port}/api/keywords/`
-        // eslint-disable-next-line
+        // eslint-disable-next-line handle-callback-err
       }, (err, res, body) => {
+        expect(res.statusCode).toBe(200)
+        expect(body).toEqual(expected)
+        done()
+      })
+    })
+  })
+
+  it('should respond to a GET request at /api/keywords/categories/', done => {
+    const expected = {
+      _items: [{
+        id: 1,
+        name: 'Vegetable'
+      }, {
+        id: 2,
+        name: 'Utility'
+      }]
+    }
+
+    async.series([
+      callback => {
+        resetDatabase(dbSession, callback)
+      },
+      callback => {
+        dbSession.insert(
+          'category',
+          { name: 'Vegetable' },
+          err => {
+            callback(err)
+          }
+        )
+      },
+      callback => {
+        dbSession.insert(
+          'category',
+          { name: 'Utility' },
+          err => {
+            callback(err)
+          }
+        )
+      }
+    ], (err, results) => {
+      if (err) {
+        throw (err)
+      }
+      request.get({
+        json: true,
+        url: 'http://localhost:3001/api/keywords/categories/'
+      },
+      // eslint-disable-next-line handle-callback-err
+      (err, res, body) => {
         expect(res.statusCode).toBe(200)
         expect(body).toEqual(expected)
         done()

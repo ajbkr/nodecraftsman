@@ -25,6 +25,19 @@ function Server (port) {
     }
   })
 
+  server.route('/api/keywords/categories', {
+    GET: (req, res) => {
+      dbSession.fetchAll('SELECT id, name FROM category ORDER BY id', (err, rows) => {
+        if (err) {
+          console.log(err)
+          res.status.internalServerError(err)
+        } else {
+          res.collection(rows).send()
+        }
+      })
+    }
+  })
+
   return server
 }
 

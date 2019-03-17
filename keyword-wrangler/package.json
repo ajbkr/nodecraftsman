@@ -4,10 +4,11 @@
   "description": "A tool to manage keywords",
   "main": "src/backend/index.js",
   "scripts": {
+    "dev-data": "./dev-data.sh",
     "lint": "standard 'migrations/**/*.js' 'spec/**/*.js' 'src/backend/**/*.js' src/frontend/app/**/*.js",
     "migrate-up": "db-migrate up --env test",
-    "start": "node src/backend/index.js",
-    "test": "npm run migrate-up && jasmine-node --captureExceptions --verbose ./spec/"
+    "start": "KW_ENV=dev node src/backend/index.js",
+    "test": "KW_ENV=test npm run migrate-up && jasmine-node --captureExceptions --verbose ./spec/"
   },
   "keywords": [],
   "author": "",

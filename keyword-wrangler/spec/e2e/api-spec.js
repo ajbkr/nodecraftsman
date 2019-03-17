@@ -125,4 +125,197 @@ describe('The API', _ => {
       })
     })
   })
+
+  it('should create a new keyword when receiving a POST request at /api/keywords/', done => {
+    const expected = {
+      _items: [{
+        categoryID: 1,
+        id: 1,
+        value: 'Aubergine'
+      }, {
+        categoryID: 1,
+        id: 2,
+        value: 'Onion'
+      }]
+    }
+
+    const body = {
+      categoryID: 1,
+      value: 'Onion'
+    }
+
+    async.series([
+      callback => {
+        dbSession.insert(
+          'category',
+          { name: 'Vegetable' },
+          err => {
+            callback(err)
+          }
+        )
+      },
+      callback => {
+        dbSession.insert(
+          'keyword',
+          { categoryID: 1, value: 'Aubergine' },
+          err => {
+            callback(err)
+          }
+        )
+      }
+    ], (err, results) => {
+      if (err) {
+        throw err
+      }
+      request.post({
+        body,
+        json: true,
+        url: 'http://localhost:3001/api/keywords/'
+      }, (err, res, body) => {
+        if (err) {
+          throw err
+        }
+        expect(res.statusCode).toBe(200)
+        request.get({
+          json: true,
+          url: 'http://localhost:3001/api/keywords/'
+          // eslint-disable-next-line handle-callback-err
+        }, (err, res, body) => {
+          expect(res.statusCode).toBe(200)
+          expect(body).toEqual(expected)
+          done()
+        })
+      })
+    })
+  })
+
+  it('should update a keyword when receiving a POST request at /api/keywords/:id/', done => {
+    const expected = {
+      _items: [{
+        categoryID: 2,
+        id: 1,
+        value: 'Onion'
+      }]
+    }
+
+    const body = {
+      categoryID: 2,
+      id: 1,
+      value: 'Onion'
+    }
+
+    async.series([
+      callback => {
+        dbSession.insert(
+          'category',
+          { name: 'Vegetable' },
+          err => {
+            callback(err)
+          }
+        )
+      },
+      callback => {
+        dbSession.insert(
+          'category',
+          { name: 'Utility' },
+          err => {
+            callback(err)
+          }
+        )
+      },
+      callback => {
+        dbSession.insert(
+          'keyword',
+          { value: 'Aubergine', categoryID: 1 },
+          err => {
+            callback(err)
+          }
+        )
+      }
+    ], (err, results) => {
+      if (err) {
+        throw err
+      }
+      request.post({
+        body,
+        json: true,
+        url: 'http://localhost:3001/api/keywords/1'
+      }, (err, res, body) => {
+        if (err) {
+          throw err
+        }
+        expect(res.statusCode).toBe(200)
+        request.get({
+          json: true,
+          url: 'http://localhost:3001/api/keywords/'
+          // eslint-disable-next-line handle-callback-err
+        }, (err, res, body) => {
+          expect(res.statusCode).toBe(200)
+          expect(body).toEqual(expected)
+          done()
+        })
+      })
+    })
+  })
+
+  it('should remove a keyword when receiving a DELETE request at /api/keywords/:id/', done => {
+    const expected = {
+      _items: [{
+        categoryID: 1,
+        id: 1,
+        value: 'Aubergine'
+      }]
+    }
+
+    async.series([
+      callback => {
+        dbSession.insert(
+          'category',
+          { name: 'Vegetable' },
+          err => {
+            callback(err)
+          }
+        )
+      },
+      callback => {
+        dbSession.insert(
+          'keyword',
+          { categoryID: 1, value: 'Aubergine' },
+          err => {
+            callback(err)
+          }
+        )
+      },
+      callback => {
+        dbSession.insert(
+          'keyword',
+          { categoryID: 1, value: 'Onion' },
+          err => {
+            callback(err)
+          }
+        )
+      }
+    ], (err, results) => {
+      if (err) {
+        throw err
+      }
+      request.del({
+        json: true,
+        url: 'http://localhost:3001/api/keywords/2/'
+      }, (err, res, body) => {
+        if (err) {
+          throw err
+        }
+        request.get({
+          json: true,
+          url: 'http://localhost:3001/api/keywords/'
+          // eslint-disable-next-line handle-callback-err
+        }, (err, res, body) => {
+          expect(res.statusCode).toBe(200)
+          expect(body).toEqual(expected)
+          done()
+        })
+      })
+    })
+  })
 })

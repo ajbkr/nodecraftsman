@@ -1,8 +1,8 @@
 Node Craftsman
 ==============
 
-Worked examples from Manuel Kiessling's
-[Node Craftsman Book](https://leanpub.com/nodecraftsman).
+Reworked examples from Manuel Kiessling's
+[The Node Craftsman Book](https://leanpub.com/nodecraftsman).
 
 I have modified some of the source code to use ES6/7 and have added linting
 using [JavaScript Standard Style](https://standardjs.com/).
@@ -26,7 +26,7 @@ appropriate.
 Keyword Wrangler
 ----------------
 
-Changes made to the Keyword Wrangler product featured in part 2 of the book
+Changes made to the Keyword Wrangler example featured in part 2 of the book
 include:
 
 - bower has been replaced with npm (uses a public `node_modules` directory, given this is non-production code)
